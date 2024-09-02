@@ -1,0 +1,165 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Домашние задания для самураев}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+
+
+
+
+\begin{document}
+
+\section*{Домашнее задание 1}
+
+Дедлайн: 2024-09-16
+
+\begin{enumerate}
+\item Вася решает три задачи по теории вероятностей. 
+Вероятности решить эти задачи равны $0.1$, $0.2$ и $0.3$. 
+Решения задач никак не связаны между собой, знание ни одной из задач не помогает решить ни одну другую.
+Обозначим буквой $N$ общее количество решенных задач. 
+
+\begin{enumerate}
+    \item Найдите все значения $N$ и их вероятности. 
+    \item Найдите $\P(N > 1)$, $\E(N)$ и $\E(N^2)$.
+\end{enumerate}
+
+\item За работу Вася получает случайное количество $\xi$ баллов, равновероятно распределённое от $1$ до $n$. 
+
+Найдите $\E(\xi)$, $\E(\xi^2)$, $\E(\xi^3)$.
+
+\item Берём набор данных по ссылке 
+
+\url{https://github.com/bdemeshev/hse_panda_metrics_2024_2025/raw/main/home_assignments/ha01_data.csv}.
+
+Здесь две переменных: $y_i$ — количество просмотренных Васей рилзов в день $i$ 
+и бинарная переменная $x_i$ ($x_i = A$ — обычный день, $x_i = B$ — день дедлайна по теории вероятностей).
+
+Рассмотрим две гипотезы. 
+Нулевая гипотеза $H_0$: приближение дедлайна по вероятностям никак не влияет на количество просмотренных рилзов.
+Альтернативная гипотеза $H_1$: приближение дедлайна в среднем снижает количество просмотренных рилзов. 
+
+\begin{enumerate}
+    \item Посчитайте фактическое значение статистики $S = \bar y_B - \bar y_A$.
+    \item Предполагая, что $H_0$ верна, сгенерируйте $10000$ случайных перестановок меток $x$ и для 
+    каждой перестановки посчитайте значение статистики $S^{\text{new}} = \bar y_B^{\text{new}} - \bar y_A^{\text{new}}$.
+    \item Оцените $p$-значение, в данном случае $p$-значение — это вероятность $\P(S^{\text{new}} \leq S \mid S, H_0)$.
+    \item Для принятия решения, отвергать или нет $H_0$, мы используем уровень значимости $\alpha = 0.05$.
+    Отвергаем ли мы $H_0$?
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
+% здесь проектируемая часть
+
+\end{document}
+
