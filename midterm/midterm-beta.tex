@@ -1,0 +1,331 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Теория вероятностей для самураев}
+\chead{}
+\rhead{Контрольная работа: резервный день}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+% \setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\DeclareMathOperator{\rank}{rank}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+\DeclareMathOperator{\plim}{plim}
+
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cF}{\mathcal{F}}
+
+
+\newcommand{\SST}{\text{SST}}
+\newcommand{\SSR}{\text{SS}^{\text{res}}}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\hb}{\hat{\beta}}
+\newcommand{\dPois}{\mathrm{Pois}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+
+\begin{document}
+
+\begin{enumerate}
+
+    \item Случайная величина $X$ имеет функцию плотности $f(x) = 1 - \abs{x}$ на отрезке $[-1;1]$ и $0$ за его пределами.
+    \begin{enumerate}
+        \item {[3]} Найдите константу $c$ такую, что $\P(X > c \mid X > 0) = 1/2$.
+        \item {[4]} Найдите ковариацию $\Cov(X, X^3)$.
+        \item {[3]} Найдите функцию плотности величины $Y = \ln \abs{X}$.
+    \end{enumerate}
+
+    
+    \item Алиса подбрасывает правильную монетку один раз. 
+    Если монетка выпадет орлом, то Алиса выплачивает Бобу один рубль. 
+    Если монетка выпадает решкой, то Алиса выплачивает Бобу случайную сумму распределённую экспоненциально с интенсивностью $\lambda = 1$ рубль$^{-1}$. 
+    Обозначим $X$ — выигрыш Боба, а $Y$ — индикатор того, что монетка выпала орлом.
+    \begin{enumerate}
+        \item {[4]} Найдите $\E(X)$, $\Var(X)$.
+        \item {[2]} Найдите $\Cov(X, Y)$.
+        \item {[4]} Найдите функцию распределения $F(x)$ величины $X$ и постройте её график.
+    \end{enumerate}
+
+    \item  Дональд Трамп подкидывает пару стандартных игральных кубиков до тех пор, пока одновременно не выпадет две шестёрки.
+    Обозначим за $N$ — общее количество бросков кубиков (бросок пары считаем за два броска кубика, величина $N$ принимает только чётные значения), а $S$ — общее количество выпавших шестёрок во всех бросках. 
+    \begin{enumerate}
+        \item {[2]} Найдите вероятности $\P(N = 26)$ и $\P(S = 11)$.
+        \item {[4]} Найдите ожидание $\E(N)$ и дисперсию $\Var(N)$.
+        \item {[4]} Найдите энтропии $\H(N)$ и $\H(S)$.
+    \end{enumerate}
+
+
+    \item {[10]} Пара величин $(X, Y)$ имеет функцию плотности $f(x, y) = 9x^2y^2$ на квадрате $[0;1]\times [0;1]$ и $0$ вне квадрата. 
+    \begin{enumerate}
+        \item {[3]} Найдите ожидание $\E(X^2 / Y^2)$ и вероятностью $\P(Y < X)$.
+        \item {[3]} Найдите функцию распределения величины $Z = 2X + 7$.
+        \item {[1]} Зависимы ли величины $X$ и $Y$?
+        \item {[3]} Найдите ковариацию $\Cov(X + Y, X - 2Y)$.
+    \end{enumerate}
+
+
+
+    \item {[10]} Подсудимый виновен с некоторой вероятностью $p$.
+    Независимо друг от друга и от виновности подсудимого, каждый из 12 присяжных проголосует за верное решение (виновен или не виновен) с вероятностью $4/5$
+    и за ошибочное — с вероятностью $1/5$.
+    \begin{enumerate}
+        \item {[5]} Найдите ожидание и дисперсию количества присяжных, голосующих за виновность. 
+        \item {[2]} Найдите вероятность того, что ровно $10$ присяжных проголосуют за виновность. 
+        % \item {[2]} Найдите наиболее вероятное число верно проголосовавших присяжных.
+        \item {[3]} Найдите вероятность того, что подсудимый виновен, если ровно $10$ присяжных проголосовали за его виновность. 
+    \end{enumerate}
+
+    \item Величины $X$ и $Y$ дискретны. 
+    Для каждой ситуации приведите пример или докажите, что данное соотношений энтропий невозможно.
+    \begin{enumerate}
+        \item {[3]} $\H(X + Y) = \H(X) + \H(Y)$;
+        \item {[3]} $\H(X + Y) < \H(X) + \H(Y)$;
+        \item {[4]} $\H(X + Y) > \H(X) + \H(Y)$;
+    \end{enumerate}
+
+
+
+\end{enumerate}
+
+
+\end{document}
+
+\begin{enumerate}
+    \item {[10]} Случайная величина $X$ имеет функцию плотности $f(x) = \abs{x}$ на отрезке $[-1;1]$ и $0$ за его пределами.
+    \begin{enumerate}
+        \item {[3]} Найдите условную вероятность $\P(X > 0.5 \mid X > 0)$.
+        \item {[4]} Найдите ковариацию $\Cov(X, X^3)$.
+        \item {[3]} Найдите функцию плотности величины $Y = \ln \abs{X}$.
+    \end{enumerate}
+
+    \item {[10]} Илон и Маск независимо друг от друга подбрасывают правильную монетку.
+    Илон подбрасывает $10$ раз, а Маск — $11$ раз. 
+    У Илона выпадает случайное количество $X$ орлов, у Маска — $Y$ орлов. 
+
+    \begin{enumerate}
+        \item {[2]} Найдите вероятность $\P(X + Y = 7)$.
+        \item {[4]} Найдите вероятность $\P(Y > X)$.
+        \item {[4]} Найдите условное ожидание $\E(X \mid X + Y = 12)$.
+    \end{enumerate}
+
+    Подсказка: в быстром ответе на всю задачу остаётся один биномиальный коэффициент :)
+
+
+    \item {[10]} Пара студентов играет один матч в камень-ножницы-бумага.
+    Матч состоит из нескольких раундов.
+    Все игроки всегда выбирают равновероятно камень, ножницы и бумагу. 
+    Раунды играют до тех пор, пока не определится победитель. 
+
+    Обозначим $T$ — число ничьих раундов, а $S$ — общее число ножниц в матче у обоих игроков. 
+    \begin{enumerate}
+        \item {[3]} Найдите энтропию $\H(T)$.
+        \item {[7]} Найдите энтропию $\H(S)$.
+    \end{enumerate}
+
+
+    \item {[10]} Студенты фкн в составе 300 человек играют в камень-ножницы-бумага индивидуально до определения Самого Главного Везунчика.
+    В каждой паре игроки играют один матч, состоящий из раундов камень-ножница-бумага до тех пор, пока не определится победитель.
+    Проигравший раунд (и матч) игрок выбывает и далее в матчах не участвует. 
+    Все игроки всегда выбирают равновероятно камень, ножницы и бумагу. 
+
+    Обозначим $N$ — общее число раундов (не матчей!). 
+
+    \begin{enumerate}
+        \item {[2]} Найдите вероятность $\P(N = 300)$.
+        \item {[4]} Найдите ожидание $\E(N)$.
+        \item {[4]} Найдите дисперсию $\Var(N)$.
+    \end{enumerate}
+    
+
+    \item {[10]} На сцене четыре закрытых двери. 
+    За одной из дверей — дорогой автомобиль, за остальными — козы. 
+    Ведущий шоу знает, что находится за каждой дверью, игрок шоу — не знает.
+    Игрок хочет выиграть автомобиль. 
+    Шоу идёт так:
+
+    \begin{enumerate}
+        \item[Шаг 1.] Игрок встаёт возле одной из закрытых дверей.
+        
+        \item[Шаг 2.] Ведущий открывает одну из дверей с козой, возле которой нет игрока.
+        Остаётся закрытыми три двери, у одной из которых стоит игрок. 
+        Затем ведущий предлагает игроку возможность перейти к любой другой двери.
+
+        \item[Шаг 3.] Игрок перемещается или остаётся на месте.
+
+        \item[Шаг 4.] Ведущий снова открывает одну из дверей с козой, возле которой нет игрока.
+        Остаётся закрытыми две двери, у одной из которых стоит игрок.
+        Снова ведущий предлагает игроку возможность перейти к другой закрытой двери.
+
+        \item[Шаг 5.] Игрок перемещается или остаётся на месте.    
+        \item[Шаг 6.] Игрок получает то, что находится за дверью, у которой он стоит.
+    \end{enumerate}
+    
+    \begin{enumerate}
+        \item {[7]} Как выглядит оптимальная стратегия игрока?
+        \item {[3]} Чему равна вероятность получения автомобиля при оптимальной стратегии?
+    \end{enumerate}
+    
+
+    \item {[10]} Пара величин $(X, Y)$ имеет функцию плотности $f(x, y) = 6xy^2$ на квадрате $[0;1]\times [0;1]$ и $0$ вне квадрата. 
+    \begin{enumerate}
+        \item {[3]} Найдите ожидание $\E(X/Y)$ и вероятностью $\P(X > Y)$.
+        \item {[3]} Найдите функцию распределения $F_X(t)$.
+        \item {[1]} Зависимы ли величины $X$ и $Y$?
+        \item {[3]} Найдите ожидание $\E(W)$, где $W = F(X, Y)$ и $F$ — совместная функция распределения. 
+    \end{enumerate}
+
+
+
+\end{enumerate}
+
+\end{document}
+
+\begin{enumerate}
+    \item 
+    \item 
+    \item Для геометрического распределения с вероятностью $p$ 
+    энтропия равна $\H(X) = -\ln p - \ln (1 - p) (1 - p) / p$.
+
+    Для $\P(T = k) = p (1 - p)^k$ для $k \in \{0, 1, 2, \dots \}$ с $p = 2/3$.
+    
+    Отсюда $H(T) = 1.5 \ln 3 - \ln 2$. 
+    
+    За верную формулу для $\P(T = k)$ — 1 балл. 
+
+
+    \item 
+
+    \begin{enumerate}
+        \item Нужна одна ничья и 288 побед за один раунд, $\P(N = 300) = 299 \cdot (2/9) (2/3)^{288}$.
+        
+        За неверный ответ $\P(N = 300) = (2/3)^{300}$ поставил 1 балл.
+        \item $\E(N) = 299 \cdot 1/p = 299 \cdot 3 /2$.
+        \item $\Var(N) = 299 \cdot (1-p)/p^2 = 299 \cdot 3/4$.
+    \end{enumerate}
+
+\end{enumerate}
+
+
+
+\end{document}
+
