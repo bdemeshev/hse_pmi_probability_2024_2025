@@ -1,0 +1,210 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Теория вероятностей для самураев}
+\chead{}
+\rhead{Экзамен}
+\lfoot{$F(0.6) = 0.73$, $F(0.4) = 0.66$, $F(-0.25) = 0.4$, $F(1.03) = 0.85$, $F(0.05) = 0.52$ }
+\cfoot{}
+\rfoot{}
+
+
+
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+% \setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\DeclareMathOperator{\rank}{rank}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+\DeclareMathOperator{\plim}{plim}
+
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cF}{\mathcal{F}}
+
+
+\newcommand{\SST}{\text{SST}}
+\newcommand{\SSR}{\text{SS}^{\text{res}}}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\hb}{\hat{\beta}}
+\newcommand{\dPois}{\mathrm{Pois}}
+\newcommand{\dBin}{\mathrm{Bin}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+
+\begin{document}
+
+\begin{enumerate}
+    \item {[10]} Совместные расходы Императора и Императрицы $(X, Y)$ равномерно распределены в области, заданной неравенствами $0 \leq Y \leq 1$, $0 \leq X \leq 2$, $X + Y \leq 2$.
+    
+    \begin{enumerate}
+        \item {[3]} Найдите функцию плотности расходов Императора $X$.
+        \item {[3 + 4]} Найдите условные ожидание $\E(X \mid Y)$ и дисперсию $\Var(X \mid Y)$.
+    \end{enumerate}
+
+    \item {[10]} Сила удара меча у опытного самурая равномерно распределена на отрезке $[2; 5]$,
+    а у неопытного — равномерно на отрезке $[1; 4]$.
+    Собрались как-то вместе 500 самураев и ударили мечом по разу, независимо друг от друга. 
+
+    \begin{enumerate}
+        \item {[4]} Какова вероятность того, что суммарная сила всех ударов превысит $1500$, если среди самураев $200$ опытных? 
+        \item {[6]} Сколько было опытных самураев, если вероятность того, что суммарная сила ударов опытных превзойдёт суммарную силу неопытных равна $0.6$? 
+    \end{enumerate}
+    
+    \item {[10]} Известно, что $X \sim \cN(1, 2)$, $(Y \mid X) \sim \cN(2X, 4)$.
+    \begin{enumerate}
+        \item {[7]} Найдите условное распределение $(X \mid Y)$.
+        \item {[3]} Найдите ковариацию $\Cov(X^2, Y)$.
+    \end{enumerate}
+    
+    \item {[10]} Телефонные звонки поступают сёгуну Минамото-но Ёритомо согласно пуассоновскому потоку с интенсивностью $\lambda$. 
+    Сёгун сегодня немного рассеян и берёт трубку на каждый звонок независимо от других с вероятностью $p$.
+    Рассмотрим процесс $(Y_t)$ количества телефонных звонков, отвеченных Ёримото к моменту времени $t$.
+    \begin{enumerate}
+        \item {[7]} Используя аксиомы пуассоновского потока, докажите, что $(Y_t)$ — пуассоновский поток.
+        \item {[3]} Какова вероятность того, что между первым поступившим звонком и первым принятым звонком пройдёт не менее получаса при $\lambda = 4$ звонка в час и $p = 0.5$?
+    \end{enumerate}
+    
+    \item {[10]} Десять самураев случайно независимо друг от друга встали равномерно вдоль аллеи единичной длины из криптомерий. 
+    Обозначим $S_1$, $S_2$, \dots, $S_{10}$ их координаты в порядке возрастания и определим вектор $W = (S_3, S_5, S_9)$.
+    \begin{enumerate}
+        \item {[4]} Найдите совместную функцию плотности вектора $W$.
+        \item {[2 + 4]} Найдите вектор ожиданий $\E(W)$ и ковариационную матрицу $\Var(W)$.
+    \end{enumerate}
+
+    \item {[10]} Сёгун Минамото-но Ёритомо хочет отбирать на службу только опытных самураев. 
+    Сила удара меча у опытного самурая равномерно распределена на отрезке $[2; 5]$,
+    а у неопытного — равномерно на отрезке $[1; 4]$.
+
+    Испытуемый самурай бьёт мечом и если сила удара оказалась больше порога $a$, то Ёримото принимает самурая на работу.
+
+    Существует два типа ошибок. 
+    Ошибка первого рода: на работу взяли неопытного самурая. 
+    Ошибка второго рода: опытному самураю отказали в работе. 
+
+    \begin{enumerate}
+        \item {[3]} Найдите вероятности ошибок первого и второго рода при $a = 3.5$.
+        \item {[7]} Постройте кривую зависимости ошибки второго рода от ошибки первого рода при различных порогах $a$.
+    \end{enumerate}
+
+
+\end{enumerate}
+    
+
+\end{document}
+
