@@ -1,0 +1,292 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{mathtools}
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Демо версии на февраль 2025}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\pCorr}{\mathrm{pCorr}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+\DeclareMathOperator{\plim}{plim}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \dN{\mathcal{N}}
+
+
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+\newcommand{\dBern}{\mathrm{Bern}}
+\newcommand{\dBin}{\mathrm{Bin}}
+\newcommand{\dGamma}{\mathrm{Gamma}}
+\newcommand{\dBeta}{\mathrm{Beta}}
+
+
+
+\begin{document}
+
+\section*{Формат}
+
+В работе будет 6 задач. 
+Задачи имеют равный вес. 
+Продолжительность работы 120 минут. 
+Можно будет использовать в качестве разрешенной шпаргалки один лист А4 со всех шести его сторон.
+
+\section*{Вариант «Птолемей»}
+\begin{enumerate}
+    \item % одномерное нормальное 
+    Случайные величины $X$ и $Y$ заданы на одном множестве исходов $\Omega$ и величину $W = \max\{ X, Y \}$.
+    \begin{enumerate}
+        \item Докажите, что случайная величина $W$ измерима относительно сигма-алгебры $\sigma(X, Y)$.
+        \item Приведите два примера нетривиальных событий (отличных от $\emptyset$ и $\Omega$), которые лежат в $\sigma(X, Y)$, но при этом не лежат в $\sigma(W)$.
+        \item Верно ли, что $\sigma(W) \cup \sigma(X, Y)$ — сигма-алгебра?
+    \end{enumerate}
+    
+    
+    \item На числовой прямой $\RR$ заданы два набора подмножеств, $\mathcal{A} = \{\text{все интервалы вида } (a; b], \text{ где }a, b\in \RR \}$ и 
+$\mathcal{I} = \{\text{все интервалы вида } [a; b), \text{ где }a, b\in \mathbb{Q} \}$.
+
+Совпадают ли сигма-алгебры $\sigma(A)$ и $\sigma(B)$?
+
+Если совпадают, то докажите их совпадение. 
+Если не совпадают, то приведите два примера множеств, которыми эти сигма-алгебры отличаются. 
+
+    \item Рассмотрим последовательность характеристических функций 
+    \[
+    \phi_n(x) = \exp(3it/n - 4(1 + 1/n^2)t^2)(0.3 \exp(it) + 0.7\exp(-it)).
+    \]
+    Обозначим с помощью $L$ — случайную величину, соответствующую пределу данной последовательности. 
+    \begin{enumerate}
+        \item Найдите предел последовательности $\phi_n$ при $n\to \infty$.
+        \item Представьте $L$ в виде суммы двух величин с классическими законами распределения.
+        \item Найдите $\E(L)$ и $\Var(L)$.
+        \item Что можно утверждать про независимость случайных величин последовательности $(X_n)$ с характеристическими функциями $(\phi_n)$?
+        % \item Приведите пример последовательности характеристических функций, у которой есть предел, но ни одна случайная величина пределу не соответствует. 
+    \end{enumerate}
+
+    \item Клавдий подкидывает правильную монетку один раз. 
+    Если монетка выпадает орлом, то он складывает 50 независимых экспоненциально распределенных величин с интенсивностью $1$ каждая. 
+    Если монетка выпадает решкой, то он складывает 100 независимых экспоненциально распределенных величин с интенсивностью $2$ каждая. 
+    В результате Клавдий получает случайную величину $K$.
+
+    \begin{enumerate}
+        \item Найдите характеристическую функцию случайной величины $K$.
+        \item Разложите полученную характеристическую функцию $\phi(t)$ в ряд Тейлора до $o(t^2)$.
+        \item Какой вероятностный смысл несёт величина $\phi''(2025)$?
+    \end{enumerate}
+
+    \item Величины $(u_n)$ независимы и одинаково распределены с ожиданием $10$ и дисперсией $20$.
+    Моменты $\E(u_n^3)$ и $\E(u_n^4)$ конечны.
+    Определим $X_n = (u_1 + u_2 + \dots + u_n)^2 / n^2$.
+
+    \begin{enumerate}
+        \item Найдите $\lim \E(X_n)$.
+        \item Найдите $\lim \Var(X_n)$.
+        \item Найдите предел по вероятности $\plim X_n$.
+    \end{enumerate}
+    
+    \item Величины $X_n$ распределены биномиально $\dBin(n, 1/2)$.
+    \begin{enumerate}
+        \item Найдите предел по распределению последовательности $(X_n - \E(X_n)) / \sqrt{\Var(X_n)}$.
+        \item Найдите предел по вероятности последовательности $n\Var(X_n) / (nX_n  - X^2_n)$.
+        \item Найдите предел по распределению последовательности $\sqrt{n} (X_n - \E(X_n)) / \sqrt{nX_n  - X^2_n}$.
+    \end{enumerate}
+
+    Уточнение: можно опираться на центральную предельную теорему и леммы Слуцкого. 
+
+\end{enumerate}
+
+
+\section*{Вариант «Коперник»}
+
+\begin{enumerate}
+    \item Величины $X_n$ имеют функцию плотности $f(x) = n x^{n-1}$ на отрезке $[0;1]$.
+    \begin{enumerate}
+        \item Найдите $\lim \E(S_n)$.
+        \item Найдите $\lim \Var(S_n)$.
+        \item К чему и в каких смыслах (по вероятности, почти наверное, по распределению, в $L^1$, в $L^2$) сходится последовательность $X_n$?
+    \end{enumerate}
+
+    \item Николаю нужно сложить $100$ независимых величин, равномерных на отрезке $[0;1]$.
+    Однако каждую величину Николай забывает добавить в сумму с вероятностью $0.1$, независимо значения величин и от того, добавил ли он остальные величины. 
+    В результате Николай получает случайную величину $N$.
+
+    \begin{enumerate}
+        \item Найдите характеристическую функцию случайной величины $N$.
+        \item Разложите полученную характеристическую функцию $\phi(t)$ в ряд Тейлора до $o(t^2)$.
+        \item Найдите математическое ожидание и дисперсию $N$.
+    \end{enumerate}
+
+
+    \item Величины $(u_n)$ независимы и одинаково распределены с ожиданием $10$ и дисперсией $20$.
+    Определим $y_n = u_n + u_{n-1}$ и $S_n = y_1 + y_2 + \dots + y_n$.
+
+    \begin{enumerate}
+        \item Найдите $\E(S_n)$ и $\lim \E(S_n)$.
+        \item Найдите $\Var(S_n)$ и $\lim \Var(S_n)$.
+        \item Найдите предел по распределению $\plim (S_n - \E(S_n))/\sqrt{n}$.
+    \end{enumerate}
+
+    \item Последовательность $(X_n)$ сходится по вероятности к величине $X$, а про случайную величину $Y$ ничего не известно. 
+    \begin{enumerate}
+        \item Вспомнив аддитивность вероятности, с обоснованием найдите предел $\lim \P(\abs{Y} \leq c_n)$, если $c_n \to \infty$. 
+        \item С обоснованием найдите предел по вероятности последовательности $Y \cdot X_n$. 
+    \end{enumerate}
+
+    Уточнение: в пункте (б) можно опираться только на определение сходимости по вероятности. 
+
+    \item Царь Кощей может в пределах своего благостояния каждый день утром закупать или продавать мем-койн YAGA. 
+    Курс YAGA за каждые сутки независимо от других с вероятностью $0.8$ растёт в $2$ раза, а с вероятностью $0.2$ падает в $10$ раз. 
+    
+    Изначально у Кощея $S_0 = 100$ рублей, инфляция в рублях равна нулю\footnote{это сказочная задача!}.
+
+    Определим долгосрочную дневную процентную ставку $r$ условием $\plim S_n / (1 + r)^n = S_0$.
+
+    \begin{enumerate}
+        \item Чему равна долгосрочная дневная процентная ставка, если Кощей держит все свои деньги в YAGA?
+        \item Как выглядит стратегия Кощея, максимизирующая долгосрочную дневную процентную ставку?
+    \end{enumerate}
+
+
+    Подсказка: \url{https://en.wikipedia.org/wiki/Kelly_criterion}
+
+    \item Царевна Несмеяна любит читать несмешные книжки. 
+    Всего у неё 8 книг, $k$-я по счёту книга оказывается несмешной с вероятностью $1/k$.
+    Цель Несмеяны — максимизировать вероятность прочесть все несмешные книги за наименьшее число попыток. 
+
+    Как выглядит оптимальная стратегия Несмеяны?
+
+    Подсказка: \url{https://en.wikipedia.org/wiki/Odds_algorithm}
+
+\end{enumerate}
+
+
+\end{document}
+
+%Из определения условного ожидания, $\E(X \mid A) = \E(X \cdot I_A) / \P(A)$, 
+%легко получаются определения условной дисперсии, $\Var(X \mid A) = \E(X^2 \mid A) - (\E(X \mid A))^2$,
+%условной ковариации $\Cov(X, Y \mid A) = \E(XY \mid A) - \E(X \mid A) \E(Y \mid A)$ и даже корреляции, 
+%$\Corr(X, Y \mid A) = \Cov(X, Y \mid A) / \sqrt{\Var(X \mid A)\Var(Y \mid A)}$.
+
+% здесь проектируемая часть
+
+
+
+\end{document}
+
