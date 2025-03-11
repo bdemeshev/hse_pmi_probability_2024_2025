@@ -1,0 +1,223 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usetikzlibrary{shapes, arrows, positioning}
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Теория вероятностей для самураев}
+\chead{}
+\rhead{Контрольная: резервный день}
+\lfoot{}
+%\lfoot{$F(0.6) = 0.73$, $F(0.4) = 0.66$, $F(-0.25) = 0.4$, $F(1.03) = 0.85$, $F(0.05) = 0.52$ }
+\cfoot{}
+\rfoot{}
+
+
+
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\DeclareMathOperator{\rank}{rank}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+\DeclareMathOperator{\plim}{plim}
+
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cF}{\mathcal{F}}
+
+
+\newcommand{\SST}{\text{SST}}
+\newcommand{\SSR}{\text{SS}^{\text{res}}}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\hb}{\hat{\beta}}
+\newcommand{\dPois}{\mathrm{Pois}}
+\newcommand{\dBin}{\mathrm{Bin}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+
+\begin{document}
+
+\begin{enumerate}
+\item {[10]} Величины $(X_n)$ независимы и равномерно распределены на отрезке $[1; 2]$.
+\begin{enumerate}
+\item {[5]} Найдите предел по вероятности
+\[
+\plim (X_1 - 1)(X_2 - 1)(X_3 - 1) \dots (X_n - 1) / n!
+\]
+% \item Сходится ли последовательность дробей в пункте (а) по распределению и в пространстве $L^2$?
+\item {[5]} Найдите предел по вероятности 
+\[
+    \plim \frac{6n - 7}{(X_1 - 2X_2)^2 + (X_2 - 2X_3)^2 + \dots + (X_{n-1} - 2X_n)^2}.
+\]
+\end{enumerate}
+
+\item {[10]} Рассмотрим две последовательности биномиально распределённых случайных величин, 
+\[
+X_n \sim \dBin(3n, 1/(n^2 + 5)) \quad \text{и} \quad Y_n \sim \dBin(2025, n/(2n + 30)).
+\]
+\begin{enumerate}
+    \item {[2 + 2 + 2]} К чему сходятся по распределению последовательности $(X_n)$, $(Y_n)$ и $(X_n Y_n)$?
+    \item {[2 + 2]} Если возможно, приведите пример, когда последовательность $(Y_n)$ сходится по вероятности и когда она не сходится по вероятности.
+\end{enumerate}
+
+\item {[10]} Величины $X_1$, $X_2$, $X_3$ независимы и равномерно распределены на отрезке $[1;2]$.
+Найдите характеристическую функцию случайной величины $Y$,
+\[
+Y = \begin{cases}
+    X_1, \text{ если } X_1 + X_2 > 3, \\
+    0, \text{ иначе.}
+\end{cases}
+\]
+
+\item {[10]} Характеристическая функция величины $X$ равна $\phi(t) = 4/(4 + \exp(-2it) - 4\exp(-it))$.
+\begin{enumerate}
+    \item {[6]} Какое распределение имеет величина $X$?
+    \item {[4]} Найдите $\E(X)$ и $\Var(X)$.
+\end{enumerate}
+
+
+\item {[10]} Немного сигма-алгебр для настоящего самурая!
+\begin{enumerate}
+    \item {[2]} Множество всех исходов равно $\Omega = \{a, b, c, d\}$. 
+    Случайная величина $Y$ определена как $Y(a) = -1$, $Y(b) = 1$, $Y(c) = 0$, $Y(d) = -1$.
+    Найдите сигма-алгебру $\sigma(Y + Y^2)$.
+    \item {[4]} Верно ли, что $\sigma(X + Y, X) \subseteq \sigma(X, Y)$ для произвольных величин $X$ и $Y$? Докажите или приведите контр-пример.
+    \item {[4]} Верно ли, что $\sigma(X, Y) \subseteq \sigma(X + Y, X)$ для произвольных величин $X$ и $Y$? Докажите или приведите контр-пример.
+\end{enumerate}
+
+% Примечание: здесь $\sigma(R)$ — минимальная сигма-алгебра, порождённая величиной $R$, а не стандартное отклонение :)
+
+\item {[10]} Каждый день в заезде участвую только две лошади: Юлиус и Фру-фру. 
+Ставки на Фру-фру принимаются с коэффициентом $3$, то есть при победе Фру-фру ставка будет возвращена в тройном размере. 
+Ставки на Юлиуса принимаются с коэффициентом $3/2$.
+Безусловная вероятность победы Фру-фру равна $1/3$. 
+
+Игрок начинает со стартовой суммой $S_0 = 100$ и каждый день ставит все свои деньги в некоторой пропорции на Фру-фру и Юлиуса. 
+Игрок заметил, что условная вероятность победы Фру-фру равна $0.5$, если идёт дождь. 
+Дождь идёт каждый день независимо от других с вероятностью $0.1$.
+
+Определим долгосрочную процентную ставку $r$ условием $\plim (S_n / S_0)^{1/n} = 1 + r$, где $S_n$ — благосостояние игрока после $n$ дней.
+\begin{enumerate}
+    \item {[4]} Какая стратегия максимизирует $\E(S_n)$?
+    \item {[4]} Какая стратегия максимизирует долгосрочную процетную ставку?
+    \item {[2]} Чему равна максимально достижимая долгосрочная процентная ставка?
+\end{enumerate}
+
+\end{enumerate}
+    
+
+\end{document}
+
