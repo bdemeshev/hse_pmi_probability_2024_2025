@@ -1,0 +1,234 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{mathtools}
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Демо версии на экзамен 2025}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\pCorr}{\mathrm{pCorr}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+\DeclareMathOperator{\plim}{plim}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \dN{\mathcal{N}}
+
+
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+\newcommand{\dBern}{\mathrm{Bern}}
+\newcommand{\dBin}{\mathrm{Bin}}
+\newcommand{\dGamma}{\mathrm{Gamma}}
+\newcommand{\dBeta}{\mathrm{Beta}}
+
+
+
+\begin{document}
+
+\section*{Формат}
+
+В экзамене будет 6 задач: четыре задачи по темам второго семестра и две — по темам первого. 
+В демо версиях сделан акцент на темы второго семестра.
+Задачи имеют равный вес. 
+Продолжительность работы 120 минут. 
+Можно будет использовать в качестве разрешенной шпаргалки один лист А4 со всех шести его сторон.
+
+
+\section*{Вариант «Лискевич»}
+\begin{enumerate}
+    \item 
+    Рассмотрим стандартный винеровский процесс $(W_t)$.
+    \begin{enumerate}
+        \item Найдите $\E(W_4 \mid W_5)$, $\E(W_5 \mid W_4)$, $\Var(W_4 \mid W_5)$, $\Var(W_5 \mid W_4)$.
+        \item При каком $\alpha$ процесс $\exp(6W_t + \alpha t)$ будет мартингалом?
+    \end{enumerate}
+    
+    
+    \item Процессы $(W_t)$ и $(V_t)$ — стандартные винеровский процессы, независимые между собой. 
+    Если возможно, найдите все такие $\alpha$ и $\beta$, чтобы процессы $(X_t)$ и $(Y_t)$ были
+    стандартными винеровскими
+    \[
+    X_t = \alpha W_t + (1 - \alpha) V_t,  \quad Y_t = \cos(42) W_t + \sin (\beta) V_t.
+    \]
+
+    \item На первом шаге мы случайно выбираем $X$ по равномерному закону на отрезке $[0;2]$.
+    На втором шаге мы случайно выбираем $Y$ по Пуассону с интенсивностью $\lambda = X$.
+    \begin{enumerate}
+        \item Найдите $\E(Y)$ и $\Var(Y)$.
+        \item Найдите функцию плотности случайной величины $\Var(Y \mid X)$.
+    \end{enumerate}
+
+    \item Илон Маск каждый день зарабатывает случайное количество DOGE-койнов $Y_t$, экспоненициально распределённое с интенсивностью $1/10^6$.
+    Заработки за разные дни независимы.
+    
+    Обозначим за $\tau$ тот день, когда его заработок впервые превысит $10^6$ DOGE,
+    а суммарный заработок — за  $S = Y_1 + Y_2 + \dots + Y_\tau$.
+    \begin{enumerate}
+        \item Как распределена величина $\tau$? Найдите $\E(\tau)$.
+        \item Найдите $\alpha$, чтобы процесс $M_t = \sum_{k=1}^t Y_k - \alpha t$ был мартингалом.
+        \item Найдите $\E(S)$.
+    \end{enumerate}
+    
+    \item Неправильная монетка выпадает орлом с вероятностью $p = 0.3$. 
+    При выпадении орла игрок зарабатывает $X_t = +1$, а при выпадении решки — $X_t = -1$.
+    Обозначим суммарный выигрыш игрока как $S_t = X_1 + X_2 + \dots + X_t$ и $\tau$ — первый момент времени, когда $S_t$ достигнет $100$ или $-50$.
+
+    \begin{enumerate}
+        \item Найдите $\alpha$ такое, что процесс $M_t = S_t - \alpha t$ — мартингал. 
+        \item Найдите $\beta$ такое, что процесс $Y_t = \exp(\beta S_t)$ — мартингал. 
+        \item Найдите $\P(S_\tau = 100)$.
+        \item Найдите $\E(\tau)$.
+    \end{enumerate}
+
+    Подсказка: достаточно применить теорему Дуба к $M_t$ и $Y_t$.
+
+    \item В одной корзине лежат бильярдные шары с номерами от 3 до 9, во второй — с номерами от 1 до 7. 
+    Мы выбираем случайно равновероятно один шар из первой корзины и один шар — из второй. 
+    Из полученных двух шаров мы равновероятно один называем $X$, а второй — $Y$.
+    \begin{enumerate}
+        \item Найдите $\E(Y \mid X)$.
+        \item Найдите $\Var(Y \mid X)$.
+    \end{enumerate}
+    
+%    Уточнение: можно опираться на центральную предельную теорему и леммы Слуцкого. 
+
+\end{enumerate}
+
+
+\section*{Вариант «Рафаэль»}
+
+Скоро открытие :)
+
+\begin{enumerate}
+\item 
+\end{enumerate}
+
+\end{document}
+
+%Из определения условного ожидания, $\E(X \mid A) = \E(X \cdot I_A) / \P(A)$, 
+%легко получаются определения условной дисперсии, $\Var(X \mid A) = \E(X^2 \mid A) - (\E(X \mid A))^2$,
+%условной ковариации $\Cov(X, Y \mid A) = \E(XY \mid A) - \E(X \mid A) \E(Y \mid A)$ и даже корреляции, 
+%$\Corr(X, Y \mid A) = \Cov(X, Y \mid A) / \sqrt{\Var(X \mid A)\Var(Y \mid A)}$.
+
+% здесь проектируемая часть
+
+
+
+\end{document}
+
