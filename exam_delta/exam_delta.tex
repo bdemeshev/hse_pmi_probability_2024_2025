@@ -1,0 +1,231 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\urlstyle{same}
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{mathtools}
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Теория вероятностей, ПМИ}
+\chead{}
+\rhead{Экзамен, 2025-03-28}
+\lfoot{Да пребудет с тобой Сила!}
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\pCorr}{\mathrm{pCorr}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+\DeclareMathOperator{\plim}{plim}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \dN{\mathcal{N}}
+
+
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+\newcommand{\dBern}{\mathrm{Bern}}
+\newcommand{\dExpo}{\mathrm{Expo}}
+\newcommand{\dBin}{\mathrm{Bin}}
+\newcommand{\dGamma}{\mathrm{Gamma}}
+\newcommand{\dBeta}{\mathrm{Beta}}
+\newcommand{\dPois}{\mathrm{Pois}}
+
+
+
+\begin{document}
+
+
+
+\begin{enumerate}
+
+    \item Известно, что $\E(Y \mid X) = 2 + 3X$, $\Var(X) = 9$, $\E(X) = 6$.
+    \begin{enumerate}
+        \item {[2 + 3]} Найдите $\E(Y)$, $\Cov(X, Y)$.
+        \item {[5]} В каких пределах могут лежать $\Var(Y \mid X)$ и $\Var(Y)$?
+    \end{enumerate}
+
+
+    \item Величины $U_1$, $U_2$ распределены равномерно на отрезке $[0, 1]$ и независимы.
+    Определим последовательность $X_n = n^2 \cdot I[U_1 \leq 1/(n + 2)] + U_2 \cdot n/ (n+2)$.
+
+    \begin{enumerate}
+        \item {[3]} Сходится ли $(X_n)$ почти наверное и если да, то к чему?
+        \item {[2]} Сходится ли $(X_n)$ по вероятности и если да, то к чему?
+        \item {[2]} Сходится ли $(X_n)$ по распределению и если да, то к чему?
+        \item {[3]} Сходится ли $(X_n)$ в $L^1$ и если да, то к чему?
+    \end{enumerate}
+
+
+    \newpage
+
+
+    \item 
+    Рассмотрим стандартный винеровский процесс $(W_t)$.
+    \begin{enumerate}
+        \item {[5]} Найдите $\Cov(W_1, W_7 \mid W_3)$ и $\E(W_2^2 W_4^2)$.
+        \item {[5]} При каком $\alpha$ процесс $Y_t = (3 + \alpha W_t)^2 - 10t$ будет мартингалом?
+    \end{enumerate}
+    
+    \item Улитка стартует в точке $S_0 = 7$. 
+    Каждую минуту она равновероятно смещается влево или вправо на единицу. 
+    \begin{enumerate}
+        \item {[3]} При какой константе $\alpha$ процесс $Y_t = \sum_{k=0}^t S_k - \alpha S_t^3$ будет мартингалом?
+    \end{enumerate}
+    Улитка отдыхает в точках $S_0 = 0$ и $S_0 = 20$.
+    Обозначим $\tau$ момент времени, когда она впервые достигнет одной из точек отдыха, $\tau = \min\{t \mid S_t \in\{0, 20\}\}$.
+    \begin{enumerate}[resume]
+        \item {[4]} Слепо применяя теорему Дуба, найдите $\E(S_1 + S_2 +\dots + S_\tau)$.
+        \item {[3]} Аккуратно проверьте, что теорему Дуба можно было применять. 
+    \end{enumerate}
+
+    Уточнение: без доказательства можно пользоваться тем, что $\P(S_\tau = 20) = 7/20$.
+
+
+    %\item На первом шаге величина $X$ выбирается из гамма-распределения $\dGamma(r, p/(1-p))$, где $r\in \NN$ и $p \in (0, 1)$.
+    %На втором шаге величина $Y$ выбирается из пуассоновского распределения с интенсивностью $X$.
+    %\begin{enumerate}
+    %    \item {[2]} Найдите $\E(Y \mid X)$ и $\Var(Y \mid X)$.
+    %    \item {[3]} Найдите ожидание $\E(Y)$.
+    %    \item {[5]} Найдите вероятность $\P(Y = k)$.
+    %\end{enumerate}
+
+    %Подсказка: $a^{b+1} \cdot \int_0^{\infty} x^b \exp(-ax) \, dx = \Gamma(b + 1)$ и $\Gamma(b + 1) = b!$ для натуральных $b$.
+    
+    %\lfoot{Паниковать на экзамене строго запрещено!}
+    \newpage
+    %\lfoot{Да пребудет с тобой Сила!}
+
+    \item Величины $X_1$, $X_2$, \dots, $X_5$ независимы и экспоненциально распределены $X_i \sim \dExpo(\lambda_i)$.
+    Определим  $M = \min\{X_3, X_4, X_5\}$.
+    \begin{enumerate}
+        \item {[3]} Как распределена величина $M$?
+        \item {[3]} Найдите вероятность $\P(X_1 < X_2)$.
+        \item {[4]} Найдите функцию распределения величины $L = \ln X_1 - \ln X_2$ при $\lambda_1 = \lambda_2 = 1$.
+    \end{enumerate}
+
+    \item Величины $X_1$, $X_2$, \dots, $X_n$ независимы и равномерно распределены на отрезке $[0, a]$,
+    рассмотрим наибольшую величину $H = \max\{X_1, \dots, X_n\}$ и наименьшую величину $L = \min\{X_1, \dots, X_n\}$.
+    \begin{enumerate}
+        \item {[3]} Найдите $\E(L)$ любым способом. 
+    \end{enumerate}
+    Определим ожидание $h(a) = \E(L \cdot H)$.
+    \begin{enumerate}[resume]
+        \item {[5]} Выпишите уравнение, связывающее $h(a + u)$ и $h(a)$, с точностью до $o(u)$.
+        % \item {[2]} Выпишите дифференциальное уравнение, которому удовлетворяет функция $h(a)$.
+        \item {[2]} Укажите начальное условие, которому удовлетворяет функция $h(a)$.
+    \end{enumerate}
+
+    
+\end{enumerate}
+
+\end{document}
+
